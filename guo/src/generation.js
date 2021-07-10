@@ -144,7 +144,14 @@ function getCardHTML(resource, value) {
         contentHTML = `<img src="img/old_pickaxe.png" />`;
     } else {
         for (let i = 0; i < value; i++) {
-            contentHTML += `<img src="img/${resource}_icon.png" />`;
+            if(resource == "diamond" || resource == "iron" || resource == "stone"){
+                contentHTML += `<img src="img/${resource}_icon.png" />
+                <audio id="bgMusic">
+                <source = src="img/${resource}_icon.wav" type="audio/wav"></audio>`;    
+            }else{
+                contentHTML += `<img src="img/${resource}_icon.png" />`;
+
+            }
         }
     }
 

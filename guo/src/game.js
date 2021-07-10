@@ -204,6 +204,12 @@ function onProductClick(mouseEvent) {
             const protoCard = this.parentElement.querySelector('.card');
             const newCard = createDeckCard(this.parentElement.dataset.card);
             addCardToPile({elem: protoCard}, newCard, 0);
+            if(this.parentElement.dataset.resource == "stone"){
+                var audio = document.getElementById("bgMusic");
+                //播放(继续播放)
+                audio.play();
+            }
+    
 
             targetPile = pile.discard;
 
