@@ -507,5 +507,35 @@ body {
   text-shadow: 0 5px #c98ee8;
   margin: 70px;
 }
+#lost {
+  position: absolute;
+  top: 150px;
+  left: 0;
+  right: 0;
+  z-index: 300;
+  background: #000000;
+  display: none;
+}
+#lost div {
+  font-size: 50px;
+  color: white;
+  text-shadow: 0 5px #c98ee8;
+  margin: 70px;
+}
+#bgm {
+  position: absolute;
+  top: 150px;
+  left: 0;
+  right: 0;
+  z-index: 300;
+  background: #000000;
+  display: none;
+}
+#bgm div {
+  font-size: 50px;
+  color: white;
+  text-shadow: 0 5px #c98ee8;
+  margin: 70px;
+}
 
 /*# sourceMappingURL=style.css.map */
