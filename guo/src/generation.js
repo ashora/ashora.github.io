@@ -145,9 +145,15 @@ function getCardHTML(resource, value) {
     } else {
         for (let i = 0; i < value; i++) {
             if(resource == "diamond" || resource == "iron" || resource == "stone"){
-                contentHTML += `<img src="img/${resource}_icon.png" />
-                <audio id="bgMusic">
-                <source = src="img/${resource}_icon.wav" type="audio/wav"></audio>`;    
+                if(i == 0){
+                    contentHTML += `<img src="img/${resource}_icon.png" />
+                    <audio id="${resource}1_bgMusic">
+                    <source = src="img/${resource}1_icon.wav" type="audio/wav"></audio><audio id="${resource}2_bgMusic">
+                    <source = src="img/${resource}2_icon.wav" type="audio/wav"></audio><audio id="${resource}3_bgMusic">
+                    <source = src="img/${resource}3_icon.wav" type="audio/wav"></audio>`;        
+                }else{
+                    contentHTML += `<img src="img/${resource}_icon.png" />`; 
+                }
             }else{
                 contentHTML += `<img src="img/${resource}_icon.png" />`;
 

@@ -14,7 +14,8 @@ let deckScreenElem;
 
 let pickaxeTimer;
 
-let resources = { stone: 0, iron: 0, diamond: 0, tnt: 0, stairs: 0 };
+let resources = { stone: 100, iron: 49, diamond: 10, tnt: 100, stairs: 0 };
+let getGuo = 0;
 
 function startGame() {
     for (let id in pile) {
@@ -118,7 +119,14 @@ function adjustResource(resource, value)
         updateResources();
 
         if (resource == "stairs" && resources.stairs == MAX_LEVEL) {
-            document.getElementById('victory').style.display = "block";
+            if(getGuo == 1){
+                document.getElementById('victory').style.display = "block";
+                var audio = document.getElementById("victory_music");
+                audio.play();
+            }else{
+                document.getElementById('lost').style.display = "block";
+            }
+            
             clearInterval(pickaxeTimer);
         }
     }
@@ -204,12 +212,28 @@ function onProductClick(mouseEvent) {
             const protoCard = this.parentElement.querySelector('.card');
             const newCard = createDeckCard(this.parentElement.dataset.card);
             addCardToPile({elem: protoCard}, newCard, 0);
-            if(this.parentElement.dataset.resource == "stone"){
-                var audio = document.getElementById("bgMusic");
-                //播放(继续播放)
+            //console.log(newCard.dataset.resource);
+            if(newCard.dataset.resource == "diamond"){getGuo = 1;}
+            if(newCard.dataset.resource == "stone"){
+                var random_num = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+                var filename = "stone"+random_num+"_bgMusic";
+                //console.log(filename);
+                var audio = document.getElementById(filename);
                 audio.play();
-            }
-    
+            }else if(newCard.dataset.resource == "iron"){
+                var random_num = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+                var filename = "iron"+random_num+"_bgMusic";
+                var audio = document.getElementById(filename);
+                audio.play();
+            }else if(newCard.dataset.resource == "diamond"){
+                var random_num = Math.floor(Math.random() * (3 - 1 + 1)) + 1;
+                var filename = "diamond"+random_num+"_bgMusic";
+                var audio = document.getElementById(filename);
+                audio.play();
+            }else if(newCard.dataset.resource == "天桥老"){
+                var audio = document.getElementById("bgm_loop");
+                audio.play();
+        }
 
             targetPile = pile.discard;
 
@@ -259,11 +283,18 @@ function showDeckScreen() {
     const cards = pile.deck.cards.concat(pile.discard.cards);
 
     for (let i=0; i<cards.length; i++) {
-        let clone = cards[i].cloneNode(true);
-        clone.style.transform = null;
-        clone.classList = 'card';
-        clone.onclick = onDestroyCardClick;
-        container.appendChild(clone);
+        //console.log(cards[i].dataset.resource);
+        if(cards[i].dataset.resource == "stairs"){
+            let clone1 = cards[i].cloneNode(true);
+            clone1.style.transform = null;
+            clone1.classList = 'card';
+        }else{
+            let clone = cards[i].cloneNode(true);
+            clone.style.transform = null;
+            clone.classList = 'card';
+            clone.onclick = onDestroyCardClick;
+            container.appendChild(clone);
+        }
     }
 
     updateDeckScreen();
@@ -280,7 +311,7 @@ function updateDeckScreen() {
 function onDestroyCardClick() {
     if (resources.tnt >= getDestroyCost()) {
         if (!tryRemoveCard(this.dataset, pile.deck)) {
-            tryRemoveCard(this.dataset, pile.discard);
+                tryRemoveCard(this.dataset, pile.discard);
         }
         adjustResource('tnt', -getDestroyCost());
         this.classList.add('destroyed');
