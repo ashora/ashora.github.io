@@ -14,6 +14,10 @@
 
 6.技术：考虑到本次活动，我们是线上参与并且后面要分享，所以直接采用了web开发+javascript；后期可能会考虑移植到手机平台。
 
+策划、美术和程序：陈惟斌
+
+音乐和音效：尤裴佳
+
 ### License
 
 遵循 MIT 许可证。有关详细,请参阅 [LICENSE](https://github.com/ashora/ashora.github.io/blob/master/LICENSE)。
